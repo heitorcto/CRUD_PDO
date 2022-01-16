@@ -6,7 +6,9 @@ Outra ideia desse projeto é estar aprendendo comandos do Git / GitHub
 - Para Otimização e a parte de design do projeto.
 
 -> VERSÃO DO PROJETO 
-- 
+- 1.0.2022
+    Modificações: Interface atualizada e mais clean do projeto.
+
 
 -> Ordenação do Git / GitHub
 - git init (Para Criar um repositório vazio)
