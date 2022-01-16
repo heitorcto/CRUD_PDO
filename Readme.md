@@ -18,3 +18,4 @@ Outra ideia desse projeto é estar aprendendo comandos do Git / GitHub
 - git remote add origin LINK (Para linkar o repositório do github)
 - git push -u origin main (Encaminhar meus arquivos para o github, o -u aparece só na primeira vez)
 - git checkout -b "nome" (Criando uma branch para o projeto)
+- git checkout nome_da_branch (Mudar para outra branch rapidamente)
