@@ -1,0 +1,12 @@
+.btn-purple{
+    background: #6e4fdf;
+    color: #fff;
+    border-color: #6447ce;
+    font-weight: bold;
+    transition: 0.5s;
+}
+.btn-purple:hover{
+    background: #8160f6;
+    color: #fff;
+    font-weight: bold;
+}

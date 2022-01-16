@@ -5,6 +5,9 @@ Outra ideia desse projeto é estar aprendendo comandos do Git / GitHub
 -> CONTRIBUIÇÕES
 - Para Otimização e a parte de design do projeto.
 
+-> VERSÃO DO PROJETO 
+- 
+
 -> Ordenação do Git / GitHub
 - git init (Para Criar um repositório vazio)
 - git add (Encaminha arquivo para ficar em espera)
