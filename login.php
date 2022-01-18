@@ -1,3 +1,32 @@
+<?php
+    include("dbConnect.php");
+    require_once __DIR__ . '/vendor/autoload.php';
+
+    use Crud\Usuario;
+
+    $usuario = new Usuario;
+
+    if(isset($_POST['email']) && isset($_POST['senha']))
+    {
+        // CRIANDO AS VARIÁVEIS 
+        $usuario->setEmail($_POST['email']);
+        $usuario->setSenha($_POST['senha']);
+        $email = $usuario->getEmail();
+        $senha = $usuario->getSenha();
+
+        $verificar_tabela = $conn->prepare("SELECT * FROM usuario");
+        $verificar_tabela->execute();
+
+        while($usuario_info = $verificar_tabela->fetch(PDO::FETCH_ASSOC))
+        {
+            if($email == $usuario_info['email_user'] && $senha == $usuario_info['senha_user']){
+                echo "Tem um registro igualzinho! Ebaaaaaaaaaa";
+            } else {
+                echo "Não tem registro! Tristeza total!";
+            }
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -29,7 +58,7 @@
                         <div class="card shadow-lg">
                             <div class="card-body p-5">
                                 <h1 class="fs-4 card-title fw-bold mb-4 text-center">Login</h1>
-                                <form method="POST" action="inserir.php" class="needs-validation">
+                                <form method="POST" action="login.php" class="needs-validation">
                                     <div class="mb-3">
                                         <input type="email" class="form-control" placeholder="E-mail" name="email" required autofocus>
                                         
@@ -56,7 +85,7 @@
                             </div>
                             <div class="card-footer py-3 border-0">
                                 <div class="text-center">
-                                    Não tem uma conta? <a href="cadastro.html" class="text-dark">Crie uma!</a>
+                                    Não tem uma conta? <a href="cadastro.php" class="text-dark">Crie uma!</a>
                                 </div>
                             </div>
                         </div>

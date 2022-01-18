@@ -9,6 +9,9 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         
+        <!-- JS PRÓPRIO -->
+        <script src="js/funcoes.js"></script>
+        
         <!-- ESTILO PRÓPRIO -->
         <link href="estilos/estiloGeral.css" rel="stylesheet">
         
@@ -24,7 +27,7 @@
                 <div class="row justify-content-sm-center h-100">
                     <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
                         <div class="text-center my-5">
-                            <img class="img_pb" src="imagens/iconeProjeto.png" alt="logo" width="100">
+                            <img class="img_pb" id="img_pb" src="imagens/iconeProjeto.png" alt="logo" width="100">
                         </div>
                         <div class="card shadow-lg">
                             <div class="card-body p-5">
@@ -62,17 +65,17 @@
                                             <input type="checkbox" name="remember" id="remember" class="form-check-input">
                                             <label for="remember" class="form-check-label">Remember Me</label>
                                         </div> -->
-                                        <button type="submit" class="btn btn-purple">
+                                        <a href="#" onclick="cadastro()" class="btn btn-purple">
                                             Cadastrar-se
-                                        </button>
+                                        </a>
                                     </div>
                                 </form>
                             </div>
-                           <!--  <div class="card-footer py-3 border-0">
+                            <div class="card-footer py-3 border-0">
                                 <div class="text-center">
-                                    Don't have an account? <a href="register.html" class="text-dark">Create One</a>
+                                    Já tem uma conta? <a href="login.php" class="text-dark">Entrar!</a>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                         <div class="text-center mt-5 text-muted">
                             Copyright &copy; 2022-<?php echo date("Y"); ?> &mdash; Projeto CRUD

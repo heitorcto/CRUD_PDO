@@ -5,12 +5,17 @@ Outra ideia desse projeto é estar aprendendo comandos do Git / GitHub
 ## CONTRIBUIÇÕES
 - Para Otimização e a parte de design do projeto.
 
-## VERSÃO DO PROJETO 1.2.1.2022
+## VERSÃO DO PROJETO 1.3.1.2022
+- Adicionado uma animação na logo ao se cadastrar
+- Início da verificação de Login e seus redirecionamentos
+- Atualizações Gerais
+
+## VERSÕES ANTERIORES
+### 1.2.1.2022
 - A logo estava com o direcionamento errado do diretório.
 - Atualização de Animação da Logo.
 - Página de login foi integrada ao estilo das demais páginas.
 
-## VERSÕES ANTERIORES
 ### 1.1.0.2022
 - Interface atualizada e mais clean do projeto.
 

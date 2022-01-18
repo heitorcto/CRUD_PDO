@@ -14,7 +14,7 @@
     filter:grayscale(100%);
     transition:3s;
 }
-.img_pb:hover{
-    filter:grayscale(0);
+.img_pb_ativo{
+    filter:grayscale(0) !important;
     transform: scale(1.5);
 }
