@@ -1,3 +1,76 @@
+<?php
+    // IMPORTANDO DADOS
+    include("dbConnect.php");
+    require_once __DIR__ . '/vendor/autoload.php';
+
+    use Crud\Usuario;
+
+    // INSERINDO A CLASSE DO BOOTSTRAP PADRÃO PARA O FORMULÁRIO
+    $validar = "needs-validation";
+
+    // ATRIBUINDO VAZIO A TODAS AS MENSAGENS QUE PODERÃO SER EMITIDAS
+    $mensagem_aviso = null;
+    $mensagem_email = null;
+    $mensagem_sucesso = null;
+    $mensagem_erro = null;
+
+    // A VERIFICAÇÃO SÓ IRÁ ACONTECER APÓS O POST DO FORMULÁRIO
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+
+        // VERIFICANDO SE O POST FOI ENVIADO E SE O MESMO É DIFERENTE DE VAZIO
+        if((isset($_POST['nome']) && $_POST['nome'] != "") && (isset($_POST['email']) && $_POST['email'] != "") && (isset($_POST['senha']) && $_POST['senha'] != "")){
+
+            // CRIANDO NOVO OBJETO USUÁRIOS
+            $usuario = new Usuario; 
+
+            // ATRIBUINDO VALORES COM POST
+            $usuario->setNome($_POST['nome']);
+            $usuario->setEmail($_POST['email']);
+            $usuario->setSenha($_POST['senha']);
+
+            $nome = $usuario->getNome();
+            $email = $usuario->getEmail();
+            $senha = $usuario->getSenha();
+
+            // VERIFICANDO SE O E-MAIL JÁ ESTÁ CADASTRADO NO SISTEMA
+            $percorre_usuarios = $conn->prepare("SELECT * FROM usuario");
+            $percorre_usuarios->execute();
+            while($dados_usuarios = $percorre_usuarios->fetch(PDO::FETCH_ASSOC))
+            {
+                if($email == $dados_usuarios['email_user'])
+                {
+                    $email = null;
+                } 
+            }
+
+            // INSERINDO NO BANCO COM VERIFICAÇÃO DE TRY CATCH
+            try{
+
+                // PREPARANDO O SQL E SEU PARÂMETRO
+                $inserir = $conn->prepare("INSERT INTO usuario (nome_user, email_user, senha_user) VALUES (:nome_user, :email_user, :senha_user)");
+                $inserir->bindParam('nome_user', $nome);
+                $inserir->bindParam('email_user', $email);
+                $inserir->bindParam('senha_user', $senha);
+
+                // EXECUTANDO O INSERT E EMITINDO MENSAGEM DE SUCESSO
+                $inserir->execute();
+                $mensagem_sucesso = "<div class='alert alert-success' role='alert'>Cadastrado com Sucesso!</div>";
+
+            } catch(PDOException $e) {
+
+                // EMITINDO ERRO QUANDO O USUÁRIO NÃO FOR INSERIDO
+                $mensagem_erro = "<div class='alert alert-danger' role='alert'>E-mail já cadastrado!</div>";
+
+            }
+        } else {
+
+            // MODIFICANDO A CLASSE CASO A VALIDAÇÃO TENHA SIDO MAL SUCEDIDA
+            $validar = "was-validated";
+            $mensagem_aviso = "Campo obrigatório!";
+
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -12,7 +85,7 @@
         <!-- JS PRÓPRIO -->
         <script src="js/funcoes.js"></script>
         
-        <!-- ESTILO PRÓPRIO -->
+        <!-- CSS PRÓPRIO -->
         <link href="estilos/estiloGeral.css" rel="stylesheet">
         
         <!-- FAVICON -->
@@ -29,42 +102,37 @@
                         <div class="text-center my-5">
                             <img class="img_pb" id="img_pb" src="imagens/iconeProjeto.png" alt="logo" width="100">
                         </div>
+                        <?php echo $mensagem_sucesso; ?>
+                        <?php echo $mensagem_erro; ?>
                         <div class="card shadow-lg">
                             <div class="card-body p-5">
                                 <h1 class="fs-4 card-title fw-bold mb-4 text-center">Cadastro</h1>
-                                <form method="POST" action="inserir.php" class="needs-validation">
+                                <form method="POST" action="cadastro.php" id="form" class="<?php echo $validar; ?>">
 
                                     <div class="mb-3">
                                         <input type="text" class="form-control" name="nome" placeholder="Nome" required autofocus>
                                         <div class="invalid-feedback">
-                                            Nome Inválido
+                                            <?php echo $mensagem_aviso; ?>
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
                                         <input type="email" class="form-control" placeholder="E-mail" name="email" required autofocus>
                                         <div class="invalid-feedback">
-                                            E-mail Inválido
+                                            <?php echo $mensagem_aviso; ?>
                                         </div>
                                     </div>
 
                                     <div class="mb-4">
                                         <div class="mb-2 w-100">
-                                            <!-- <a href="forgot.html" class="float-end">
-                                                Forgot Password?
-                                            </a> -->
                                         </div>
                                         <input type="password" class="form-control" placeholder="Senha" name="senha" required>
                                         <div class="invalid-feedback">
-                                            Password is required
+                                            <?php echo $mensagem_aviso; ?>
                                         </div>
                                     </div>
 
                                     <div class="text-center">
-                                        <!-- <div class="form-check">
-                                            <input type="checkbox" name="remember" id="remember" class="form-check-input">
-                                            <label for="remember" class="form-check-label">Remember Me</label>
-                                        </div> -->
                                         <a href="#" onclick="cadastro()" class="btn btn-purple">
                                             Cadastrar-se
                                         </a>

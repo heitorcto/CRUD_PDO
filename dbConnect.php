@@ -1,5 +1,5 @@
 <?php 
-    // VERIFICANDO SE A CONEXÃO COM O BANCO DEU CERTO
+    // VERIFICA SE A CONEXÃO COM O BANCO DEU CERTO
     $servername = "localhost";
     $username = "root";
     $password = "";
