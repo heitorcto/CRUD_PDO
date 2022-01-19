@@ -53,7 +53,7 @@
                                 <td><?php echo $usuario_info['email_user']; ?></td>
                                 <td><?php echo $usuario_info['senha_user']; ?></td>
                                 <td> 
-                                    <a href="cadastro.php?editar=S&id=<?php echo $usuario_info['id']; ?>" class="btn" style="margin-right:2px"><i class="fas fa-pencil-alt"></i></i></a>
+                                    <a href="cadastro.php?editar&id=<?php echo $usuario_info['id']; ?>" class="btn" style="margin-right:2px"><i class="fas fa-pencil-alt"></i></i></a>
                                     <a href="excluir.php?id=<?php echo $usuario_info['id']; ?>" class="btn"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>

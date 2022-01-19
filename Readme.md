@@ -5,17 +5,22 @@ Outra ideia desse projeto é estar aprendendo comandos do Git / GitHub
 ## CONTRIBUIÇÕES
 - Para Otimização e a parte de design do projeto.
 
-## VERSÃO DO PROJETO 1.4.1.2022
+## VERSÃO DO PROJETO 1.5.1.2022
+- Pequena alteração na ação de editar foi iniciada no código do cadastro.
+- A tabela está redirecionando valores para verificação dentro da página de cadastros.
+
+## VERSÕES ANTERIORES
+### 1.4.1.2022
 - O cadastro agora possui mais verificações.
 - O insert no banco está todo armazenado no código do cadastro.
 - O código inserir.php foi excluído.
 - Comentário do código dbConnect foi alterado.
 
-## VERSÕES ANTERIORES
 ### 1.3.1.2022
 - Adicionado uma animação na logo ao se cadastrar
 - Início da verificação de Login e seus redirecionamentos
 - Atualizações Gerais
+
 ### 1.2.1.2022
 - A logo estava com o direcionamento errado do diretório.
 - Atualização de Animação da Logo.

@@ -13,8 +13,15 @@
     $mensagem_email = null;
     $mensagem_sucesso = null;
     $mensagem_erro = null;
+                      
+    // PASSANDO VALOR DO INPUT HIDDEN PARA DETERMINAR A AÇÃO DO POST
+    $acao_post = "cadastrar";
+    if(isset($_GET["editar"]))
+    {
+        $acao_post = "editar";
+    }
 
-    // A VERIFICAÇÃO SÓ IRÁ ACONTECER APÓS O POST DO FORMULÁRIO
+    // A VERIFICAÇÃO DE CADASTRO SÓ IRÁ ACONTECER APÓS O POST DO FORMULÁRIO
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
         // VERIFICANDO SE O POST FOI ENVIADO E SE O MESMO É DIFERENTE DE VAZIO
@@ -131,6 +138,8 @@
                                             <?php echo $mensagem_aviso; ?>
                                         </div>
                                     </div>
+                                    
+                                    <input type="hidden" name="acao" value="<?php echo $acao_post; ?>">
 
                                     <div class="text-center">
                                         <a href="#" onclick="cadastro()" class="btn btn-purple">
