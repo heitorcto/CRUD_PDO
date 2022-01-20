@@ -16,66 +16,151 @@
                       
     // PASSANDO VALOR DO INPUT HIDDEN PARA DETERMINAR A AÇÃO DO POST
     $acao_post = "cadastrar";
+    $botão_acao = "Cadastrar-se";
     if(isset($_GET["editar"]))
     {
         $acao_post = "editar";
+        $botão_acao = "Editar";
+
+        // RESGATA O ID DO USUÁRIO PARA RESGATAR VALORES DO MESMO 
+        $id_usuario_editar = $_GET['id'];
+
+        // PERCORRE O BANCO E RESGATA O VALOR REFERENTE AO ID
+        $usuario_editar = $conn->prepare("SELECT * FROM usuario WHERE id = :id");
+        $usuario_editar->bindParam('id', $id_usuario_editar);
+        $usuario_editar->execute();
+        $usuario_info = $usuario_editar->fetch(PDO::FETCH_ASSOC);  
     }
 
     // A VERIFICAÇÃO DE CADASTRO SÓ IRÁ ACONTECER APÓS O POST DO FORMULÁRIO
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
-        // VERIFICANDO SE O POST FOI ENVIADO E SE O MESMO É DIFERENTE DE VAZIO
-        if((isset($_POST['nome']) && $_POST['nome'] != "") && (isset($_POST['email']) && $_POST['email'] != "") && (isset($_POST['senha']) && $_POST['senha'] != "")){
-
-            // CRIANDO NOVO OBJETO USUÁRIOS
-            $usuario = new Usuario; 
-
-            // ATRIBUINDO VALORES COM POST
-            $usuario->setNome($_POST['nome']);
-            $usuario->setEmail($_POST['email']);
-            $usuario->setSenha($_POST['senha']);
-
-            $nome = $usuario->getNome();
-            $email = $usuario->getEmail();
-            $senha = $usuario->getSenha();
-
-            // VERIFICANDO SE O E-MAIL JÁ ESTÁ CADASTRADO NO SISTEMA
-            $percorre_usuarios = $conn->prepare("SELECT * FROM usuario");
-            $percorre_usuarios->execute();
-            while($dados_usuarios = $percorre_usuarios->fetch(PDO::FETCH_ASSOC))
+        // VERIFICA SE A AÇÃO É DE EDITAR
+        if($_POST['acao'] == "editar")
+        {
+            // VERIFICA SE TODOS OS CAMPOS FORAM PREENCHIDOS
+            if($_POST['nome'] != "" && $_POST['email'] != "" && $_POST['senha'] != "" && $_POST['id_editar'] != "")
             {
-                if($email == $dados_usuarios['email_user'])
+
+                // SETANDO VARIÁVEL DE VERIFICAÇÃO DE E-MAIL
+                $email_sistema = true;
+
+                // CRIANDO NOVO OBJETO USUÁRIO
+                $usuario = new Usuario; 
+                
+                // INSERINDO VALORES COM POST
+                $usuario->setId($_POST['id_editar']);
+                $usuario->setNome($_POST['nome']);
+                $usuario->setEmail($_POST['email']);
+                $usuario->setSenha($_POST['senha']);
+
+                // PASSANDO VALORES DO POST PARA AS VARIÁVEIS E EXECUTANDO O INSERT
+                $id = $usuario->getId();
+                $nome = $usuario->getNome();
+                $email = $usuario->getEmail();
+                $senha = $usuario->getSenha();
+
+                // VERIFICANDO SE O E-MAIL QUE O USUÁRIO ESTÁ TENTANDO EDITAR JÁ ESTÁ CADASTRADO NO SISTEMA
+                $percorre_usuarios = $conn->prepare("SELECT * FROM usuario WHERE id != :id");
+                $percorre_usuarios->bindParam('id', $id);
+                $percorre_usuarios->execute();
+                while($dados_usuarios = $percorre_usuarios->fetch(PDO::FETCH_ASSOC))
                 {
-                    $email = null;
-                } 
+                    if($email == $dados_usuarios['email_user'])
+                    {
+
+                        // SETANDO VARIÁVEL COMO FALSA PARA NÃO INSERIR NO BANCO DE DADOS E EMITINDO UMA MENSAGEM DE ERRO
+                        $email_sistema = false;
+                        $mensagem_erro = "<div class='alert alert-danger' role='alert'>E-mail já se encontra no sistema!</div>";
+
+                    } 
+                }
+
+                if($email_sistema == true){
+
+                    // EDITANDO NO BANCO COM VERIFICAÇÃO DE TRY CATCH
+                    try {
+
+                        // PREPARANDO O SQL E SEU PARÂMETRO
+                        $editar = $conn->prepare("UPDATE usuario SET nome_user = :nome_user,  email_user = :email_user, senha_user = :senha_user WHERE id = :id");
+                        $editar->bindParam('id', $id);
+                        $editar->bindParam('nome_user', $nome);
+                        $editar->bindParam('email_user', $email);
+                        $editar->bindParam('senha_user', $senha);
+
+                        // EXECUTANDO O UPDATE E EMITINDO MENSAGEM DE SUCESSO
+                        $editar->execute();
+                        $mensagem_sucesso = "<div class='alert alert-success' role='alert'>Editado com Sucesso!</div>";
+
+                    } catch(PDOException $e) {
+
+                        $mensagem_erro = "<div class='alert alert-danger' role='alert'>E-mail já cadastrado!</div>";
+
+                    }
+
+                }
             }
-
-            // INSERINDO NO BANCO COM VERIFICAÇÃO DE TRY CATCH
-            try{
-
-                // PREPARANDO O SQL E SEU PARÂMETRO
-                $inserir = $conn->prepare("INSERT INTO usuario (nome_user, email_user, senha_user) VALUES (:nome_user, :email_user, :senha_user)");
-                $inserir->bindParam('nome_user', $nome);
-                $inserir->bindParam('email_user', $email);
-                $inserir->bindParam('senha_user', $senha);
-
-                // EXECUTANDO O INSERT E EMITINDO MENSAGEM DE SUCESSO
-                $inserir->execute();
-                $mensagem_sucesso = "<div class='alert alert-success' role='alert'>Cadastrado com Sucesso!</div>";
-
-            } catch(PDOException $e) {
-
-                // EMITINDO ERRO QUANDO O USUÁRIO NÃO FOR INSERIDO
-                $mensagem_erro = "<div class='alert alert-danger' role='alert'>E-mail já cadastrado!</div>";
-
-            }
-        } else {
-
-            // MODIFICANDO A CLASSE CASO A VALIDAÇÃO TENHA SIDO MAL SUCEDIDA
-            $validar = "was-validated";
-            $mensagem_aviso = "Campo obrigatório!";
-
         }
+
+        // VERIFICA SE A AÇÃO É DE CADASTRO
+        if($_POST['acao'] == "cadastrar"){
+
+            // VERIFICANDO SE O POST FOI ENVIADO E SE O MESMO É DIFERENTE DE VAZIO
+            if((isset($_POST['nome']) && $_POST['nome'] != "") && (isset($_POST['email']) && $_POST['email'] != "") && (isset($_POST['senha']) && $_POST['senha'] != "")){
+
+                // CRIANDO NOVO OBJETO USUÁRIO
+                $usuario = new Usuario; 
+
+                // ATRIBUINDO VALORES COM POST
+                $usuario->setNome($_POST['nome']);
+                $usuario->setEmail($_POST['email']);
+                $usuario->setSenha($_POST['senha']);
+
+                $nome = $usuario->getNome();
+                $email = $usuario->getEmail();
+                $senha = $usuario->getSenha();
+
+                // VERIFICANDO SE O E-MAIL JÁ ESTÁ CADASTRADO NO SISTEMA
+                $percorre_usuarios = $conn->prepare("SELECT * FROM usuario");
+                $percorre_usuarios->execute();
+                while($dados_usuarios = $percorre_usuarios->fetch(PDO::FETCH_ASSOC))
+                {
+                    if($email == $dados_usuarios['email_user'])
+                    {
+
+                        // ATRIBUINDO NULO AO E-MAIL PARA QUE NÃO CONSIGA INSERIR 
+                        $email = null;
+
+                    } 
+                }
+
+                // INSERINDO NO BANCO COM VERIFICAÇÃO DE TRY CATCH
+                try{
+
+                    // PREPARANDO O SQL E SEU PARÂMETRO
+                    $inserir = $conn->prepare("INSERT INTO usuario (nome_user, email_user, senha_user) VALUES (:nome_user, :email_user, :senha_user)");
+                    $inserir->bindParam('nome_user', $nome);
+                    $inserir->bindParam('email_user', $email);
+                    $inserir->bindParam('senha_user', $senha);
+
+                    // EXECUTANDO O INSERT E EMITINDO MENSAGEM DE SUCESSO
+                    $inserir->execute();
+                    $mensagem_sucesso = "<div class='alert alert-success' role='alert'>Cadastrado com Sucesso!</div>";
+
+                } catch(PDOException $e) {
+
+                    // EMITINDO ERRO QUANDO O USUÁRIO NÃO FOR INSERIDO
+                    $mensagem_erro = "<div class='alert alert-danger' role='alert'>E-mail já cadastrado!</div>";
+
+                }
+            } else {
+
+                // MODIFICANDO A CLASSE CASO A VALIDAÇÃO TENHA SIDO MAL SUCEDIDA
+                $validar = "was-validated";
+                $mensagem_aviso = "Campo obrigatório!";
+
+            } 
+        }  
     }
 ?>
 <!DOCTYPE html>
@@ -114,17 +199,17 @@
                         <div class="card shadow-lg">
                             <div class="card-body p-5">
                                 <h1 class="fs-4 card-title fw-bold mb-4 text-center">Cadastro</h1>
-                                <form method="POST" action="cadastro.php" id="form" class="<?php echo $validar; ?>">
+                                <form method="POST" action="cadastro.php<?php if(isset($_GET["editar"])) { echo "?editar&id=".$id_usuario_editar; }?>" id="form" class="<?php echo $validar; ?>">
 
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" name="nome" placeholder="Nome" required autofocus>
+                                        <input type="text" class="form-control" name="nome" placeholder="Nome" value="<?php if(isset($_GET["editar"])) { echo $usuario_info['nome_user']; } ?>" required autofocus>
                                         <div class="invalid-feedback">
                                             <?php echo $mensagem_aviso; ?>
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
-                                        <input type="email" class="form-control" placeholder="E-mail" name="email" required autofocus>
+                                        <input type="email" class="form-control" placeholder="E-mail" name="email" value="<?php if(isset($_GET["editar"])) { echo $usuario_info['email_user']; } ?>" required autofocus>
                                         <div class="invalid-feedback">
                                             <?php echo $mensagem_aviso; ?>
                                         </div>
@@ -133,7 +218,7 @@
                                     <div class="mb-4">
                                         <div class="mb-2 w-100">
                                         </div>
-                                        <input type="password" class="form-control" placeholder="Senha" name="senha" required>
+                                        <input type="password" class="form-control" placeholder="Senha" name="senha" value="<?php if(isset($_GET["editar"])) { echo $usuario_info['senha_user']; } ?>" required>
                                         <div class="invalid-feedback">
                                             <?php echo $mensagem_aviso; ?>
                                         </div>
@@ -141,9 +226,11 @@
                                     
                                     <input type="hidden" name="acao" value="<?php echo $acao_post; ?>">
 
+                                    <?php if(isset($_GET["editar"])) { ?> <input type="hidden" name="id_editar" value="<?php echo $id_usuario_editar; ?>"> <?php } ?>
+
                                     <div class="text-center">
                                         <a href="#" onclick="cadastro()" class="btn btn-purple">
-                                            Cadastrar-se
+                                            <?php echo $botão_acao; ?>
                                         </a>
                                     </div>
                                 </form>

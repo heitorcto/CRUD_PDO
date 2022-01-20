@@ -5,11 +5,17 @@ Outra ideia desse projeto é estar aprendendo comandos do Git / GitHub
 ## CONTRIBUIÇÕES
 - Para Otimização e a parte de design do projeto.
 
-## VERSÃO DO PROJETO 1.5.1.2022
+## VERSÃO DO PROJETO 1.6.1.2022
+- Arquivos da função de editar foram excluídos.
+- Arquivo de cadastro efetua a função de inserir e editar.
+- Novos comentários para entendimento do código.
+
+
+## VERSÕES ANTERIORES
+### 1.5.1.2022
 - Pequena alteração na ação de editar foi iniciada no código do cadastro.
 - A tabela está redirecionando valores para verificação dentro da página de cadastros.
 
-## VERSÕES ANTERIORES
 ### 1.4.1.2022
 - O cadastro agora possui mais verificações.
 - O insert no banco está todo armazenado no código do cadastro.
