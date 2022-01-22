@@ -94,7 +94,7 @@
 
                     } catch(PDOException $e) {
 
-                        $mensagem_erro = "<div class='alert alert-danger' role='alert'>E-mail já cadastrado!</div>";
+                        $mensagem_erro = "<div class='alert alert-danger' role='alert'>Erro ao cadastrar!</div>";
 
                     }
 

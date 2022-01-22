@@ -5,13 +5,19 @@ Outra ideia desse projeto é estar aprendendo comandos do Git / GitHub
 ## CONTRIBUIÇÕES
 - Para Otimização e a parte de design do projeto.
 
-## VERSÃO DO PROJETO 1.6.1.2022
-- Arquivos da função de editar foram excluídos.
-- Arquivo de cadastro efetua a função de inserir e editar.
+## VERSÃO DO PROJETO 1.7.1.2022
+- Ação de excluir foi inserida no arquivo da tabela.
+- Arquivo da função de excluir foram excluídos.
+- A página de sucesso foi excluída.
 - Novos comentários para entendimento do código.
 
 
 ## VERSÕES ANTERIORES
+### 1.6.1.2022
+- Arquivos da função de editar foram excluídos.
+- Arquivo de cadastro efetua a função de inserir e editar.
+- Novos comentários para entendimento do código.
+
 ### 1.5.1.2022
 - Pequena alteração na ação de editar foi iniciada no código do cadastro.
 - A tabela está redirecionando valores para verificação dentro da página de cadastros.

@@ -1,5 +1,42 @@
 <?php 
     include("dbConnect.php");
+    require_once __DIR__ . '/vendor/autoload.php';
+
+    use Crud\Usuario;
+
+    $usuario = new Usuario;
+
+    // SETANDO MENSAGEM DE EXCLUSÃO DEL
+    $mensagem = "";
+
+    // VERIFICA SE O GET FOI SETADO
+    if(isset($_GET['id'])){
+
+        // VERIFICA SE TODOS OS CAMPOS FORAM PREENCHIDOS
+        if($_GET['id'] != "")
+        {
+            // INSERINDO VALORES COM POST
+            $usuario->setId( $_GET['id']);
+            $id = $usuario->getId();
+
+            try {
+
+                // PREPARANDO O SQL E SEU PARÂMETRO
+                $excluir = $conn->prepare("DELETE FROM usuario WHERE id = :id");
+                $excluir->bindParam('id', $id);
+
+                // EXECUTANDO A EXCLUSÃO DO BANCO
+                $excluir->execute();
+
+                $mensagem = "<div id='mensagem' class='alert alert-success' role='alert'>Excluído com Sucesso! <a href='tabela.php'>Ok!</a> </div> ";
+
+            } catch(PDOException $e) {
+
+                $mensagem = "<div id='mensagem' class='alert alert-danger' role='alert'>Erro ao excluir Usuário.</div>";
+
+            }
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,6 +62,8 @@
         <title>Usuários - Projeto CRUD</title>
     </head>
     <body>
+
+        <!-- TABELA -->
         <div class="container mt-5">
             <div class="text-center fs-4 card-title fw-bold mb-4 ">
                 Usuários
@@ -40,6 +79,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                <?php echo $mensagem; ?>
                     <?php 
                         $listagem = $conn->prepare("SELECT * FROM usuario");
                         $listagem->execute();
@@ -53,18 +93,20 @@
                                 <td><?php echo $usuario_info['email_user']; ?></td>
                                 <td><?php echo $usuario_info['senha_user']; ?></td>
                                 <td> 
-                                    <a href="cadastro.php?editar&id=<?php echo $usuario_info['id']; ?>" class="btn" style="margin-right:2px"><i class="fas fa-pencil-alt"></i></i></a>
-                                    <a href="excluir.php?id=<?php echo $usuario_info['id']; ?>" class="btn"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="cadastro.php?editar&id=<?php echo $usuario_info['id']; ?>" class="btn" style="margin-right:2px"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="tabela.php?excluir&id=<?php echo $usuario_info['id']; ?>" class="btn"><i class="fas fa-trash"></i></a>
                                 </td>
-                            </tr>
+                            </tr>   
                     <?php 
                         }
                     ?>
                 </tbody>
             </table>
         </div>  
+
         <div class="col text-center">
             <a href="cadastro.php" class="btn btn-purple">Voltar a Tela de Cadastro</a>
         </div>
+
     </body>
 </html>
