@@ -1,35 +1,51 @@
 <?php
+    // IMPORTANDO DADOS
     include("dbConnect.php");
     require_once __DIR__ . '/vendor/autoload.php';
 
     use Crud\Usuario;
 
+    // CRIANDO NOVO USUÁRIO
     $usuario = new Usuario;
+
+    // INSERINDO A CLASSE DO BOOTSTRAP PADRÃO PARA O FORMULÁRIO
+    $validar = "needs-validation";
+
+    // ATRIBUINDO VAZIO A MENSAGEM DE AVISO
+    $mensagem_erro = null;
 
     if(isset($_POST['email']) && isset($_POST['senha']))
     {
-        // CRIANDO AS VARIÁVEIS 
+        // CRIANDO AS VARIÁVEIS POR POST
         $usuario->setEmail($_POST['email']);
         $usuario->setSenha($_POST['senha']);
         $email = $usuario->getEmail();
         $senha = $usuario->getSenha();
 
+        // SELECIONANDO TODOS OS USUÁRIOS NA TABELA
         $verificar_tabela = $conn->prepare("SELECT * FROM usuario");
         $verificar_tabela->execute();
 
+        // VERIFICANDO CADA USUÁRIO E SE ALGUM BATE COM AS CREDENCIAIS INSERIDAS
         while($usuario_info = $verificar_tabela->fetch(PDO::FETCH_ASSOC))
         {
             if($email == $usuario_info['email_user'] && $senha == $usuario_info['senha_user']){
-                echo "Tem um registro igualzinho! Ebaaaaaaaaaa";
+
+                // REDIRECIONANDO PARA A PÁGINA DO FÓRUM
+                header("Location: forum.php?user=".$usuario_info['nome_user']);
+
             } else {
-                echo "Não tem registro! Tristeza total!";
+
+                // EMITINDO MENSAGEM DE ERRO
+                $mensagem_erro = "<div class='alert alert-danger' role='alert'>E-mail ou senha incorretos!</div>";
+
             }
         }
     }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
+<head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +54,10 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         
-        <!-- ESTILO PRÓPRIO -->
+        <!-- JS PRÓPRIO -->
+        <script src="js/funcoes.js"></script>
+        
+        <!-- CSS PRÓPRIO -->
         <link href="estilos/estiloGeral.css" rel="stylesheet">
         
         <!-- FAVICON -->
@@ -53,34 +72,28 @@
                 <div class="row justify-content-sm-center h-100">
                     <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
                         <div class="text-center my-5">
-                            <img class="img_pb" src="imagens/iconeProjeto.png" alt="logo" width="100">
+                            <img class="img_pb" id="img_pb" src="imagens/iconeProjeto.png" alt="logo" width="100">
                         </div>
+                        <?php echo $mensagem_erro; ?>
                         <div class="card shadow-lg">
                             <div class="card-body p-5">
                                 <h1 class="fs-4 card-title fw-bold mb-4 text-center">Login</h1>
                                 <form method="POST" action="login.php" class="needs-validation">
+
                                     <div class="mb-3">
                                         <input type="email" class="form-control" placeholder="E-mail" name="email" required autofocus>
-                                        
                                     </div>
+
                                     <div class="mb-4">
-                                        <div class="mb-2 w-100">
-                                            <!-- <a href="forgot.html" class="float-end">
-                                                Forgot Password?
-                                            </a> -->
-                                        </div>
                                         <input type="password" class="form-control" placeholder="Senha" name="senha" required>
                                     </div>
 
                                     <div class="text-center">
-                                        <!-- <div class="form-check">
-                                            <input type="checkbox" name="remember" id="remember" class="form-check-input">
-                                            <label for="remember" class="form-check-label">Remember Me</label>
-                                        </div> -->
-                                        <button type="submit" class="btn btn-purple">
+                                        <a href="#" onclick="cadastro()" class="btn btn-purple">
                                             Entrar
-                                        </button>
+                                        </a>
                                     </div>
+
                                 </form>
                             </div>
                             <div class="card-footer py-3 border-0">
