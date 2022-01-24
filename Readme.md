@@ -5,15 +5,20 @@ Outra ideia desse projeto é estar aprendendo comandos do Git / GitHub
 ## CONTRIBUIÇÕES
 - Para Otimização e a parte de design do projeto.
 
-## VERSÃO DO PROJETO 1.8.1.2022
+## VERSÃO DO PROJETO 1.9.1.2022
+- A criação do estilo do fórum está iniciado.
+- Adicionamos a tecnologia do dev icons para nos ajudar.
+- O fórum será sobre linguagens no geral.
+
+
+## VERSÕES ANTERIORES
+### 1.8.1.2022
 - O arquivo de login redireciona o usuário para o fórum.
 - O login agora valida corretamente e emite mensagem de erro.
 - A função da imagem agora também se encontra no login.
 - Novas informações foram adicionadas ao arquivo de login.
 - Um arquivo chamado forum.php foi criado e será desenvolvido em versões futuras.
 
-
-## VERSÕES ANTERIORES
 ### 1.7.1.2022
 - Ação de excluir foi inserida no arquivo da tabela.
 - Arquivo da função de excluir foram excluídos.
