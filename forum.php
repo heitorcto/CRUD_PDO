@@ -37,55 +37,80 @@ echo $usuario_logado; */
     </head>
     <body>
 
-        
-        <div class="container ">
+        <div class="container">
             <div class="row">
 
-                <div class="col">
-                    <div class="d-flex justify-content-center border">
-                        <img src="imagens/iconeProjeto.png" width="80" height="80">
-                    </div>
+                <!-- MENU DE LINGUAGENS -->
+                <div class="col-2">
+                    <a href="forum.php">
+                        <div class="mt-3 d-flex justify-content-center border-bottom">
+                            <img src="imagens/iconeProjeto.png" width="80" height="80">
+                        </div>
+                    </a>
                     <div class="d-flex justify-content-center">
-                    <i class="devicon-php-plain" style="font-size:60px;"></i>
+                        <i class="devicon-php-plain" style="font-size:60px;"></i>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <img src="imagens/iconeProjeto.png" width="80" height="80">
+                    <div class="d-flex justify-content-center mb-3">
+                        <i class="devicon-javascript-plain" style="font-size:40px;"></i>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <img src="imagens/iconeProjeto.png" width="80" height="80">
+                    <div class="d-flex justify-content-center mb-3">
+                        <i class="devicon-html5-plain" style="font-size:45px;"></i>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <img src="imagens/iconeProjeto.png" width="80" height="80">
+                    <div class="d-flex justify-content-center mb-3">
+                        <i class="devicon-css3-plain" style="font-size:45px;"></i>
                     </div>
-                        
-                            aaaaaa 
-                            <br>
-                            aaaaaa 
-                            <br>
-                            aaaaaa 
-                            <br>
-
-                   
                 </div>
 
-                <div class="col row d-flex justify-content-center" style="background:blue;">
-                    
-                            aaaaaa 
-                            <br>
-                            aaaaaa 
-                            <br>
-                            aaaaaa 
-                            <br>
-                    
+                <!-- FEED -->
+                <div class="col-8 border">
+                    <div class="mt-3 p-3 border-bottom">
+                        <div class="mb-3">
+                            <img src="imagens/UserDefault.png" class="rounded-circle" width="40" height="40">
+                            Nome
+                        </div>
+                        <div class="">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        </div>
+                        <div class="mt-2">
+                            <a href="">
+                                Responder <i class="far fa-comment-dots"></i>
+                            </a>
+                            <i class="ms-3 devicon-css3-plain" style="font-size:20px;"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3 p-3 border-bottom">
+                        <div class="mb-3">
+                            <img src="imagens/UserDefault.png" class="rounded-circle" width="40" height="40">
+                            Nome
+                        </div>
+                        <div class="">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        </div>
+                        <div class="mt-2">
+                            <a href="">
+                                Responder <i class="far fa-comment-dots"></i>
+                            </a>
+                            <i class="ms-3 devicon-css3-plain" style="font-size:20px;"></i>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="col row d-flex justify-content-center" style="background:orange;">
-                            aaaaaa 
-                            <br>
-                            aaaaaa 
-                            <br>
-                            aaaaaa 
-                            <br>
+
+                <div class="col-2">
+                    <div class="border-bottom">
+                        <div class="mb-2 mt-3 d-flex justify-content-center">
+                            <img src="imagens/UserDefault.png" class="rounded-circle" width="40" height="40">
+                        </div>
+                        <div class="mb-3 d-flex justify-content-center">
+                            Usuário Usuário
+                        </div>
+                    </div>
+                    <div class="mt-3 d-flex justify-content-center">
+                        <i class="fas fa-trophy me-2" style="font-size:30px"></i>
+                    </div>
+                    <div class="mt-3 d-flex justify-content-center">
+                        <i class="fas fa-cog me-2" style="font-size:30px"></i>
+                    </div>
                 </div>
 
             </div>
