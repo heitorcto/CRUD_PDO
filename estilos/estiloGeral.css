@@ -18,3 +18,25 @@
     filter:grayscale(0) !important;
     transform: scale(1.5);
 }
+.zoom_icone{
+    font-size: 40px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.zoom_icone:hover{
+    font-size: 50px;
+    cursor: pointer;
+}
+.icone_zoom{
+    width: 80px;
+    height: 80px;
+    transition: 0.5s;
+}
+.icone_zoom:hover{
+    width: 90px;
+    height: 90px;
+}
+.perfil_foto{
+    width: 40px;
+    height: 40px;
+}

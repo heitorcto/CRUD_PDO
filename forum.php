@@ -1,13 +1,13 @@
 <?php
 
-/* $usuario_logado = $_GET['user'];
+$usuario_logado = $_GET['user'];
 
-echo $usuario_logado; */
+echo $usuario_logado;
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,10 +33,9 @@ echo $usuario_logado; */
         <link rel="icon" href="imagens/iconeProjeto.png" type="image/png">
 
         <!-- TÍTULO DA PÁGINA -->
-        <title>Cadastro - Projeto CRUD</title>
+        <title>Fórum - Projeto CRUD</title>
     </head>
     <body>
-
         <div class="container">
             <div class="row">
 
@@ -44,77 +43,79 @@ echo $usuario_logado; */
                 <div class="col-2">
                     <a href="forum.php">
                         <div class="mt-3 d-flex justify-content-center border-bottom">
-                            <img src="imagens/iconeProjeto.png" width="80" height="80">
+                            <img class="icone_zoom" src="imagens/iconeProjeto.png">
                         </div>
                     </a>
-                    <div class="d-flex justify-content-center">
-                        <i class="devicon-php-plain" style="font-size:60px;"></i>
+                    <div class="d-flex justify-content-center mb-2">
+                        <i class="zoom_icone devicon-php-plain"></i>
                     </div>
-                    <div class="d-flex justify-content-center mb-3">
-                        <i class="devicon-javascript-plain" style="font-size:40px;"></i>
+                    <div class="d-flex justify-content-center mb-2">
+                        <i class="zoom_icone devicon-javascript-plain"></i>
                     </div>
-                    <div class="d-flex justify-content-center mb-3">
-                        <i class="devicon-html5-plain" style="font-size:45px;"></i>
+                    <div class="d-flex justify-content-center mb-2">
+                        <i class="zoom_icone devicon-html5-plain"></i>
                     </div>
-                    <div class="d-flex justify-content-center mb-3">
-                        <i class="devicon-css3-plain" style="font-size:45px;"></i>
+                    <div class="d-flex justify-content-center mb-2">
+                        <i class="zoom_icone devicon-css3-plain"></i>
                     </div>
                 </div>
 
                 <!-- FEED -->
                 <div class="col-8 border">
+
+                     <!-- POST -->
                     <div class="mt-3 p-3 border-bottom">
+                        <!-- NOME DO USUÁRIO -->
                         <div class="mb-3">
                             <img src="imagens/UserDefault.png" class="rounded-circle" width="40" height="40">
                             Nome
                         </div>
+                        <!-- DESCRIÇÃO -->
                         <div class="">
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                         </div>
+                        <!-- RESPONDER -->
                         <div class="mt-2">
                             <a href="">
                                 Responder <i class="far fa-comment-dots"></i>
                             </a>
+                            <!-- ÍCONE DA LINGUAGEM -->
                             <i class="ms-3 devicon-css3-plain" style="font-size:20px;"></i>
                         </div>
                     </div>
-                    <div class="mt-3 p-3 border-bottom">
-                        <div class="mb-3">
-                            <img src="imagens/UserDefault.png" class="rounded-circle" width="40" height="40">
-                            Nome
-                        </div>
-                        <div class="">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                        </div>
-                        <div class="mt-2">
-                            <a href="">
-                                Responder <i class="far fa-comment-dots"></i>
-                            </a>
-                            <i class="ms-3 devicon-css3-plain" style="font-size:20px;"></i>
-                        </div>
+
+                    <!-- CASOO NÃO TENHA POSTS -->
+                    <div class="mt-3 p-3 border-bottom d-flex justify-content-center">
+                        SEM POSTS ATÉ O MOMENTO
                     </div>
+
                 </div>
 
-
+                <!-- USUÁRIO E OUTRAS INFORMAÇÕES -->
                 <div class="col-2">
+                    <!-- INFO DO USUÁRIO -->
                     <div class="border-bottom">
+                        <!-- FOTO DO USUÁRIO -->
                         <div class="mb-2 mt-3 d-flex justify-content-center">
-                            <img src="imagens/UserDefault.png" class="rounded-circle" width="40" height="40">
+                            <img src="imagens/UserDefault.png" class="perfil_foto rounded-circle">
                         </div>
+                        <!-- NOME DO USUÁRIO -->
                         <div class="mb-3 d-flex justify-content-center">
-                            Usuário Usuário
+                            <?php echo $usuario_logado; ?>
                         </div>
                     </div>
+
+                    <!-- 10 LINGUAGENS MAIS DISCUTIDAS -->
                     <div class="mt-3 d-flex justify-content-center">
-                        <i class="fas fa-trophy me-2" style="font-size:30px"></i>
+                        <i class="zoom_icone fas fa-trophy me-2"></i>
                     </div>
+
+                    <!-- CONFIGURAÇÕES DO USUÁRIO -->
                     <div class="mt-3 d-flex justify-content-center">
-                        <i class="fas fa-cog me-2" style="font-size:30px"></i>
+                        <i class="zoom_icone fas fa-cog me-2"></i>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </body>
 </html>
