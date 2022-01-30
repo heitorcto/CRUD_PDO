@@ -62,28 +62,37 @@ echo $usuario_logado; */
 
                 <!-- FEED -->
                 <div class="col-8 border">
-
-                    <!-- PARA VOCÊ EFETUAR SEU POST -->
-                    <div class="mt-3 p-3 border-bottom">
-                        <!-- NOME DO USUÁRIO -->
-                        <div class="d-flex justify-content-center mb-4">
-                            Olá, Heitor CT, compartilhe suas experiências ou dúvidas.
+                    <div class="p-3">
+                        <div class="mb-3">
+                            <a href="forum.php" type="button" class="btn btn-purple">Voltar</a>
                         </div>
-                        <div class="d-flex justify-content-center mb-2">
-                            <button type="button" class="btn btn-purple ms-3">Criar Post</button>
-                        </div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Descrição</label>
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Seu código</label>
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option value="0">Selecione a Linguagem</option>
+                                    <option value="1">PHP</option>
+                                    <option value="2">HTML</option>
+                                    <option value="3">CSS</option>
+                                    <option value="3">JS</option>
+                                </select>
+                            </div>
+                            <div class="mb-2 d-flex justify-content-center">
+                                <button type="submit" class="btn btn-purple">Enviar</button>
+                            </div>
+                        </form>
                     </div>
-
-                     <!-- POST -->
-                    <div class="mt-3 p-3 border-bottom">
-                        
-                    </div>
-
-                    <!-- CASO NÃO TENHA POSTS -->
-                    <div class="mt-3 p-3 border-bottom d-flex justify-content-center">
-                        SEM POSTS ATÉ O MOMENTO
-                    </div>
-
                 </div>
 
                 <!-- USUÁRIO E OUTRAS INFORMAÇÕES -->

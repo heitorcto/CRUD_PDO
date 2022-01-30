@@ -70,7 +70,7 @@ echo $usuario_logado; */
                             Olá, Heitor CT, compartilhe suas experiências ou dúvidas.
                         </div>
                         <div class="d-flex justify-content-center mb-2">
-                            <button type="button" class="btn btn-purple ms-3">Criar Post</button>
+                            <a href="criarPost.php" type="button" class="btn btn-purple ms-3">Criar Post</a>
                         </div>
                     </div>
 
@@ -112,7 +112,7 @@ echo $usuario_logado; */
                         </div>
                         <!-- NOME DO USUÁRIO -->
                         <div class="mb-3 d-flex justify-content-center">
-                            Heitor CT
+                            Usuário
                         </div>
                     </div>
 
