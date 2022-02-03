@@ -1,10 +1,19 @@
 <?php
+    // IMPORTANDO DADOS
+    include("dbConnect.php");
+    require_once __DIR__ . '/vendor/autoload.php';
 
-/* $usuario_logado = $_GET['user'];
+    use Post\Postagem;
 
-echo $usuario_logado; */
+    $postagem = new Postagem;
 
-// refazer essa interface, analisando não ficou como eu realmente gostaria
+    // VERIFICANDO POST PARA CRIAÇÃO DE UMA DISCUSSÃO NO FÓRUM
+    if(isset($_POST['descricao']) || isset($_POST['codigo']) || isset($_POST['linguagem']))
+    {
+        echo $_POST['descricao']."<br>";
+        echo $_POST['codigo']."<br>";
+        echo $_POST['linguagem'];
+    }
 
 ?>
 

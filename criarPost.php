@@ -1,11 +1,3 @@
-<?php
-
-/* $usuario_logado = $_GET['user'];
-
-echo $usuario_logado; */
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -60,36 +52,39 @@ echo $usuario_logado; */
                     </div>
                 </div>
 
-                <!-- FEED -->
+                <!-- CRIAÇÃO DO POST -->
                 <div class="col-8 border">
                     <div class="p-3">
                         <div class="mb-3">
                             <a href="forum.php" type="button" class="btn btn-purple">Voltar</a>
                         </div>
-                        <form>
+                        <form action="forum.php" method="post">
+                            <!-- DESCRIÇÃO -->
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Descrição</label>
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                                    <textarea name="descricao" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
                                 </div>
                             </div>
+                            <!-- CÓDIGO -->
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Seu código</label>
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                                    <textarea name="codigo" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
                                 </div>
                             </div>
+                            <!-- LINGUAGEM -->
                             <div class="mb-3">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option value="0">Selecione a Linguagem</option>
-                                    <option value="1">PHP</option>
-                                    <option value="2">HTML</option>
-                                    <option value="3">CSS</option>
-                                    <option value="3">JS</option>
+                                <select name="linguagem" class="form-select" aria-label="Default select example">
+                                    <option value="">Selecione a Linguagem</option>
+                                    <option value="PHP">PHP</option>
+                                    <option value="HTML">HTML</option>
+                                    <option value="CSS">CSS</option>
+                                    <option value="JS">JS</option>
                                 </select>
                             </div>
                             <div class="mb-2 d-flex justify-content-center">
-                                <button type="submit" class="btn btn-purple">Enviar</button>
+                                <button type="submit" class="btn btn-purple">Postar</button>
                             </div>
                         </form>
                     </div>

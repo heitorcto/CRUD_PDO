@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Post\\' => array($baseDir . '/src'),
     'Crud\\' => array($baseDir . '/src'),
 );

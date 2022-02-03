@@ -8,4 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Crud\\Usuario' => $baseDir . '/src/Usuario.php',
+    'Post\\Postagem' => $baseDir . '/src/Postagem.php',
 );

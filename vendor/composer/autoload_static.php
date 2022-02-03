@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit24df2e371c6a86920edd8ab0062bada8
 {
     public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'Post\\' => 5,
+        ),
         'C' => 
         array (
             'Crud\\' => 5,
@@ -14,6 +18,10 @@ class ComposerStaticInit24df2e371c6a86920edd8ab0062bada8
     );
 
     public static $prefixDirsPsr4 = array (
+        'Post\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
         'Crud\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
@@ -23,6 +31,7 @@ class ComposerStaticInit24df2e371c6a86920edd8ab0062bada8
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Crud\\Usuario' => __DIR__ . '/../..' . '/src/Usuario.php',
+        'Post\\Postagem' => __DIR__ . '/../..' . '/src/Postagem.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
