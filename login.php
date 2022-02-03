@@ -32,7 +32,10 @@
             if($email == $usuario_info['email_user'] && $senha == $usuario_info['senha_user']){
 
                 // REDIRECIONANDO PARA A PÁGINA DO FÓRUM
-                header("Location: forum.php?user=".$usuario_info['nome_user']);
+                session_start();
+                $_SESSION['id'] = $usuario_info['id'];
+                $_SESSION['user'] = $usuario_info['nome_user'];
+                header("Location: forum.php?user=");
 
             } else {
 

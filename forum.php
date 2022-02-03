@@ -5,14 +5,15 @@
 
     use Post\Postagem;
 
+    // CHAMANDO A SESSÃO
+    session_start();
+
     $postagem = new Postagem;
 
     // VERIFICANDO POST PARA CRIAÇÃO DE UMA DISCUSSÃO NO FÓRUM
-    if(isset($_POST['descricao']) || isset($_POST['codigo']) || isset($_POST['linguagem']))
+    if(isset($_POST['descricao']) && (isset($_POST['codigo']) || isset($_POST['linguagem'])))
     {
-        echo $_POST['descricao']."<br>";
-        echo $_POST['codigo']."<br>";
-        echo $_POST['linguagem'];
+        //inserir na tabela e exibir no fórum
     }
 
 ?>
@@ -78,7 +79,7 @@
                     <div class="mt-3 p-3 border-bottom">
                         <!-- NOME DO USUÁRIO -->
                         <div class="d-flex justify-content-center mb-4">
-                            Olá, Heitor CT, compartilhe suas experiências ou dúvidas.
+                            Olá, <?php echo $_SESSION['user']; ?>, compartilhe suas experiências ou dúvidas.
                         </div>
                         <div class="d-flex justify-content-center mb-2">
                             <a href="criarPost.php" type="button" class="btn btn-purple ms-3">Criar Post</a>
@@ -123,7 +124,7 @@
                         </div>
                         <!-- NOME DO USUÁRIO -->
                         <div class="mb-3 d-flex justify-content-center">
-                            Usuário
+                            <?php echo $_SESSION['user']; ?>
                         </div>
                     </div>
 

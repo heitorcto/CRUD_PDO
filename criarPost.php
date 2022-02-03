@@ -1,3 +1,11 @@
+<?php
+    // IMPORTANDO DADOS
+    include("dbConnect.php");
+    require_once __DIR__ . '/vendor/autoload.php';
+
+    // ATRIBUINDO A SESSÃO AO USUÁRIO QUE ESTÁ LOGADO
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -100,7 +108,7 @@
                         </div>
                         <!-- NOME DO USUÁRIO -->
                         <div class="mb-3 d-flex justify-content-center">
-                            Heitor CT
+                            <?php echo $_SESSION['user']; ?>
                         </div>
                     </div>
 
