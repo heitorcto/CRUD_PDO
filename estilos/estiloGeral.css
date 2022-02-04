@@ -1,3 +1,6 @@
+a{
+    text-decoration: none;
+}
 .btn-purple{
     background: #6e4fdf;
     color: #fff;
@@ -7,6 +10,18 @@
 }
 .btn-purple:hover{
     background: #8160f6;
+    color: #fff;
+    font-weight: bold;
+}
+.btn-king{
+    background: #d8b000;
+    color: #fff;
+    border-color: #d3ac00;
+    font-weight: bold;
+    transition: 0.5s;
+}
+.btn-king:hover{
+    background: #ffd000;
     color: #fff;
     font-weight: bold;
 }

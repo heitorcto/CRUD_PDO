@@ -46,18 +46,27 @@
                             <img class="icone_zoom" src="imagens/iconeProjeto.png">
                         </div>
                     </a>
-                    <div class="d-flex justify-content-center mb-2">
-                        <i class="zoom_icone devicon-php-plain"></i>
-                    </div>
-                    <div class="d-flex justify-content-center mb-2">
-                        <i class="zoom_icone devicon-javascript-plain"></i>
-                    </div>
-                    <div class="d-flex justify-content-center mb-2">
-                        <i class="zoom_icone devicon-html5-plain"></i>
-                    </div>
-                    <div class="d-flex justify-content-center mb-2">
-                        <i class="zoom_icone devicon-css3-plain"></i>
-                    </div>
+                    <a href="">
+                       <div class="d-flex justify-content-center mt-2 mb-2 btn btn-king">
+                            TOP 10
+                        </div>
+                    </a>
+                    <?php 
+                        // LISTAR TODOS AS LINGUAGENS
+                        $listagem_linguagem = $conn->prepare("SELECT * FROM linguagens");
+                        $listagem_linguagem->execute();
+
+                        while($lings = $listagem_linguagem->fetch(PDO::FETCH_ASSOC))
+                        { 
+                    ?>
+                            <a href="">
+                            <div class="d-flex justify-content-center mt-2 mb-2 btn btn-purple">
+                                    <?php echo $lings['tipo']; ?>
+                                </div>
+                            </a>
+                    <?php 
+                        }
+                    ?>
                 </div>
 
                 <!-- CRIAÇÃO DO POST -->
@@ -112,15 +121,19 @@
                         </div>
                     </div>
 
-                    <!-- 10 LINGUAGENS MAIS DISCUTIDAS -->
-                    <div class="mt-3 d-flex justify-content-center">
-                        <i class="zoom_icone fas fa-trophy me-2"></i>
-                    </div>
-
                     <!-- CONFIGURAÇÕES DO USUÁRIO -->
-                    <div class="mt-3 d-flex justify-content-center">
-                        <i class="zoom_icone fas fa-cog me-2"></i>
-                    </div>
+                    <a href="">
+                       <div class="d-flex justify-content-center mt-2 mb-2 btn btn-purple">
+                            Config.
+                        </div>
+                    </a>
+
+                    <!-- SAIR DO USUÁRIO -->
+                    <a href="login.php">
+                       <div class="d-flex justify-content-center mt-2 mb-2 btn btn-purple">
+                            Sair
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

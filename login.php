@@ -35,7 +35,7 @@
                 session_start();
                 $_SESSION['id'] = $usuario_info['id'];
                 $_SESSION['user'] = $usuario_info['nome_user'];
-                header("Location: forum.php?user=");
+                header("Location: forum.php");
 
             } else {
 

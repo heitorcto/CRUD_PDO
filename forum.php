@@ -3,6 +3,9 @@
     include("dbConnect.php");
     require_once __DIR__ . '/vendor/autoload.php';
 
+    // DEFININDO TIMEZONE PARA BRASIL - SP
+    date_default_timezone_set('America/Sao_Paulo');
+
     use Post\Postagem;
 
     // CHAMANDO A SESSÃO
@@ -12,8 +15,42 @@
 
     // VERIFICANDO POST PARA CRIAÇÃO DE UMA DISCUSSÃO NO FÓRUM
     if(isset($_POST['descricao']) && (isset($_POST['codigo']) || isset($_POST['linguagem'])))
-    {
-        //inserir na tabela e exibir no fórum
+    { 
+        // INSERINDO VALORES COM POST
+        $postagem->setUser_id($_SESSION['user']);
+        $postagem->setDescricao_post($_POST['descricao']);
+        $postagem->setCodigo_post($_POST['codigo']);
+        $postagem->setLinguagem_post($_POST['linguagem']);
+
+        // PASSANDO VALORES DO POST PARA AS VARIÁVEIS E EXECUTANDO O INSERT
+        $user_logado = $postagem->getUser_id();
+        $descricao = $postagem->getDescricao_post();
+        $codigo = $postagem->getCodigo_post();
+        $linguagem = $postagem->getLinguagem_post();
+        $data = date("d/m/Y");
+        $hora = date("H:i");
+
+        // INSERINDO NO BANCO COM VERIFICAÇÃO DE TRY CATCH
+        try{
+
+            // PREPARANDO O SQL E SEU PARÂMETRO
+            $inserir_postagem = $conn->prepare("INSERT INTO postagem (user_post_nome, descricao_post, codigo_post, linguagem_post, data_post, hora_post) VALUES (:user_post_nome, :descricao_post, :codigo_post, :linguagem_post, :data_post, :hora_post)");
+            $inserir_postagem->bindParam('user_post_nome', $user_logado);
+            $inserir_postagem->bindParam('descricao_post', $descricao);
+            $inserir_postagem->bindParam('codigo_post', $codigo);
+            $inserir_postagem->bindParam('linguagem_post', $linguagem);
+            $inserir_postagem->bindParam('data_post', $data);
+            $inserir_postagem->bindParam('hora_post', $hora);
+
+            // EXECUTANDO O INSERT
+            $inserir_postagem->execute();
+
+        } catch(PDOException $e) {
+
+            // EMITINDO ERRO QUANDO O POST NÃO FOI INSERIDO
+            echo $e->getMessage();
+
+        }
     }
 
 ?>
@@ -50,7 +87,6 @@
     <body>
         <div class="container">
             <div class="row">
-
                 <!-- MENU DE LINGUAGENS -->
                 <div class="col-2">
                     <a href="forum.php">
@@ -58,18 +94,27 @@
                             <img class="icone_zoom" src="imagens/iconeProjeto.png">
                         </div>
                     </a>
-                    <div class="d-flex justify-content-center mb-2">
-                        <i class="zoom_icone devicon-php-plain"></i>
-                    </div>
-                    <div class="d-flex justify-content-center mb-2">
-                        <i class="zoom_icone devicon-javascript-plain"></i>
-                    </div>
-                    <div class="d-flex justify-content-center mb-2">
-                        <i class="zoom_icone devicon-html5-plain"></i>
-                    </div>
-                    <div class="d-flex justify-content-center mb-2">
-                        <i class="zoom_icone devicon-css3-plain"></i>
-                    </div>
+                    <a href="">
+                       <div class="d-flex justify-content-center mt-2 mb-2 btn btn-king">
+                            TOP 5
+                        </div>
+                    </a>
+                    <?php 
+                        // LISTAR TODOS AS LINGUAGENS
+                        $listagem_linguagem = $conn->prepare("SELECT * FROM linguagens");
+                        $listagem_linguagem->execute();
+
+                        while($lings = $listagem_linguagem->fetch(PDO::FETCH_ASSOC))
+                        { 
+                    ?>
+                            <a href="">
+                            <div class="d-flex justify-content-center mt-2 mb-2 btn btn-purple">
+                                    <?php echo $lings['tipo']; ?>
+                                </div>
+                            </a>
+                    <?php 
+                        }
+                    ?>
                 </div>
 
                 <!-- FEED -->
@@ -86,32 +131,42 @@
                         </div>
                     </div>
 
-                     <!-- POST -->
-                    <div class="mt-3 p-3 border-bottom">
-                        <!-- NOME DO USUÁRIO -->
-                        <div class="mb-2">
-                            <img src="imagens/UserDefault.png" class="rounded-circle" width="40" height="40">
-                            Nome
-                        </div>
-                        <!-- DESCRIÇÃO -->
-                        <div class="p-1">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                        </div>
-                        <!-- RESPONDER -->
-                        <div class="mt-2">
-                            <a href="">
-                                Responder <i class="far fa-comment-dots"></i>
-                            </a>
-                            <!-- ÍCONE DA LINGUAGEM -->
-                            <i class="ms-3 devicon-css3-plain" style="font-size:20px;"></i>
-                        </div>
-                    </div>
+                    <?php 
+                        // LISTAR TODOS OS POSTS
+                        $listagem_postagem = $conn->prepare("SELECT * FROM postagem ORDER BY id DESC");
+                        $listagem_postagem->execute();
 
-                    <!-- CASO NÃO TENHA POSTS -->
-                    <div class="mt-3 p-3 border-bottom d-flex justify-content-center">
-                        SEM POSTS ATÉ O MOMENTO
-                    </div>
-
+                        while($post_info = $listagem_postagem->fetch(PDO::FETCH_ASSOC))
+                        { 
+                    ?>
+                            <!-- POST -->
+                            <div class="mt-3 p-3 border-bottom">
+                                <!-- NOME DO USUÁRIO -->
+                                <div class="mb-2">
+                                    <img src="imagens/UserDefault.png" class="rounded-circle" width="40" height="40">
+                                    <span class="ms-1 fs-6 fw-bold"><?php echo $post_info['user_post_nome']; ?></span>
+                                    <span class="fs-6 fst-italic float-end"><?php echo $post_info['data_post']." às ".$post_info['hora_post']; ?></span>
+                                </div>
+                                <!-- DESCRIÇÃO -->
+                                <div class="p-1">
+                                    <?php echo $post_info['descricao_post']; ?>
+                                </div>
+                                <!-- RESPONDER -->
+                                <div class="mt-2">
+                                    <a class="btn btn-purple" href="">
+                                        Ver Mais <i class="ms-1 fas fa-plus"></i>
+                                    </a>
+                                    <!-- ÍCONE DA LINGUAGEM -->
+                                    <a href="">
+                                        <div class="btn btn-purple">
+                                            <?php echo $post_info['linguagem_post']; ?>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                    <?php 
+                        }
+                    ?>
                 </div>
 
                 <!-- USUÁRIO E OUTRAS INFORMAÇÕES -->
@@ -128,15 +183,19 @@
                         </div>
                     </div>
 
-                    <!-- 10 LINGUAGENS MAIS DISCUTIDAS -->
-                    <div class="mt-3 d-flex justify-content-center">
-                        <i class="zoom_icone fas fa-trophy me-2"></i>
-                    </div>
-
                     <!-- CONFIGURAÇÕES DO USUÁRIO -->
-                    <div class="mt-3 d-flex justify-content-center">
-                        <i class="zoom_icone fas fa-cog me-2"></i>
-                    </div>
+                    <a href="">
+                       <div class="d-flex justify-content-center mt-2 mb-2 btn btn-purple">
+                            Config.
+                        </div>
+                    </a>
+
+                    <!-- SAIR DO USUÁRIO -->
+                    <a href="login.php">
+                       <div class="d-flex justify-content-center mt-2 mb-2 btn btn-purple">
+                            Sair
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
