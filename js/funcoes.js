@@ -10,8 +10,10 @@ function cadastro(){
 // FUNÇÃO QUE EMITE UM GRÁFICO
 var ling1 = document.getElementById("ling1").value;
 var ling2 = document.getElementById("ling2").value;
-console.log(ling1)
-var linguagens = [ling1, ling2];
+var ling3 = document.getElementById("ling3").value;
+var ling4 = document.getElementById("ling4").value;
+var ling5 = document.getElementById("ling5").value;
+var linguagens = [ling1, ling2, ling3, ling4, ling5];
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, {
     type: 'bar',

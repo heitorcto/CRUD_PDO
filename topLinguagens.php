@@ -86,9 +86,9 @@
                     <canvas id="myChart" width="400" height="400"></canvas>
                     <input type="hidden" id="ling1" value="PHP"></input>
                     <input type="hidden" id="ling2" value="CSS"></input>
-                    <input type="hidden" id="ling3" value=""></input>
-                    <input type="hidden" id="ling4" value=""></input>
-                    <input type="hidden" id="ling5" value=""></input>
+                    <input type="hidden" id="ling3" value="JS"></input>
+                    <input type="hidden" id="ling4" value="HTML"></input>
+                    <input type="hidden" id="ling5" value="C"></input>
                 </div>
 
                 <!-- USUÁRIO E OUTRAS INFORMAÇÕES -->
