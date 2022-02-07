@@ -82,13 +82,22 @@
                         </div>
                     </div>
 
-                    <!-- SETANDO TOP 5 LINGUAGENS -->
+                    <!-- CHAMANDO ID DO GRÁFICO -->
                     <canvas id="myChart" width="400" height="400"></canvas>
+
+                    <!-- SETANDO TOP 5 LINGUAGENS -->
                     <input type="hidden" id="ling1" value="PHP"></input>
                     <input type="hidden" id="ling2" value="CSS"></input>
                     <input type="hidden" id="ling3" value="JS"></input>
                     <input type="hidden" id="ling4" value="HTML"></input>
                     <input type="hidden" id="ling5" value="C"></input>
+
+                    <!-- QUANTIDADE DE DISCUSSÕES POR CADA LINGUAGEM -->
+                    <input type="hidden" id="ling1qtd" value="20"></input>
+                    <input type="hidden" id="ling2qtd" value="10"></input>
+                    <input type="hidden" id="ling3qtd" value="5"></input>
+                    <input type="hidden" id="ling4qtd" value="2"></input>
+                    <input type="hidden" id="ling5qtd" value="1"></input>
                 </div>
 
                 <!-- USUÁRIO E OUTRAS INFORMAÇÕES -->
